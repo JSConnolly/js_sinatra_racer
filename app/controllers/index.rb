@@ -23,7 +23,7 @@ end
 get '/winner' do
   game = session[:current_game]
   @winner_time = params[:time] 
-  game.winner_time = Time.new(@winner_time)
+  game.winner_time = @winner_time.to_i
   game.save
   @winner = Player.find_by_name(params[:winner])
   game.winner = @winner.id
