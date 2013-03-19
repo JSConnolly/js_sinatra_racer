@@ -1,9 +1,9 @@
-<h1 class="counter">3</h1>
+<h1 id="counter">3</h1>
 
 <table class="racer_table">
     <% @players.each_with_index do |player, i| %>
         <h1><%= player.name %> Press <%= @keys[i] %></h1>
-        <tr id="<%= player.name %>">
+        <tr id="player<%= i + 1 %>" class="player-row" data-player-name="<%= player.name %>">
         <td class="active"><%= player.name %></td>
         <% 23.times do %>
          <td></td>
@@ -13,6 +13,8 @@
     <% end %>
 </table>
 
-<button id="reset"><a href="/">Reset</a></button>
+<a href="/"><button id="reset">Reset</button></a>
 
-<script src="/js/game.js"></script>
+<!-- <script src="/js/game.js"></script> -->
+<script src="http://coffeescript.org/extras/coffee-script.js"></script>
+<script type="text/coffeescript" src="/js/play.coffee"></script>
