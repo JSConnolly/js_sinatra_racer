@@ -17,10 +17,8 @@ $ ->
       end_time = new Date().getTime()
       $(document).unbind('keyup')
       elapsed = end_time - start_time
-      console.log(elapsed)
       winner = $('.active.winner').closest(".player-row").data('player-name')
-      console.log(winner)
-      window.location= "/winner?time=#{elapsed}&winner=#{winner}"
+      # window.location= "/winner?time=#{elapsed}&winner=#{winner}"
 
   start_race = ->
     start_time = new Date().getTime()
