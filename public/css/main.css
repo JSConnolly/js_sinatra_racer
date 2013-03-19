@@ -15,7 +15,7 @@
   display:none;
 }
 .racer_table td.active {
-  background-color: black;
+  background-color: blue;
 }
 
 .racer_table tr:nth-child(2) td.active {

@@ -4,7 +4,7 @@
     <% @players.each_with_index do |player, i| %>
         <h1><%= player.name %> Press <%= @keys[i] %></h1>
         <tr id="<%= player.name %>">
-        <td class="active"></td>
+        <td class="active"><%= player.name %></td>
         <% 23.times do %>
          <td></td>
         <% end %>

@@ -30,3 +30,9 @@ get '/winner' do
   game.save
   erb :winner
 end
+
+
+get 'player/:id' do 
+  @player = params[:id]
+  erb :"player_stats"
+end

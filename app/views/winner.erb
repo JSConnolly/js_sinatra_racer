@@ -3,3 +3,5 @@
 <h2>Finished in <%= @winner_time.to_f/1000 %> Seconds</h2>
 
 <button class="btn"><a href="/">Home</a></button>
+<% @player = Player.find_by_name(@winner.name) %>
+<%= erb :"player_stats", :layout=>false %>
