@@ -1,0 +1,23 @@
+.racer_table td {
+  background-color: white;
+  height: 20px;
+  width: 4%;
+  border:solid 1px;
+}
+
+.racer_table {
+  width: 90%;
+  margin: 200px auto;
+
+}
+
+ #reset {
+  display:none;
+}
+.racer_table td.active {
+  background-color: black;
+}
+
+.racer_table tr:nth-child(2) td.active {
+  background-color: yellow;
+}

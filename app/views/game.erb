@@ -1,0 +1,18 @@
+<h1 class="counter">3</h1>
+
+<table class="racer_table">
+    <% @players.each_with_index do |player, i| %>
+        <h1><%= player.name %> Press <%= @keys[i] %></h1>
+        <tr id="<%= player.name %>">
+        <td class="active"></td>
+        <% 23.times do %>
+         <td></td>
+        <% end %>
+        <td class="winner"></td>
+    </tr>
+    <% end %>
+</table>
+
+<button id="reset"><a href="/">Reset</a></button>
+
+<script src="/js/game.js"></script>
