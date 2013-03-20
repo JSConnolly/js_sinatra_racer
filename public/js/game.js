@@ -1,61 +1,56 @@
-function updatePlayerPostion(player_num, name, start_time){
-  
-  var $player_row = $("#player" + player_num);
-  $player_row
-    // remove "active" state from selected td
-    .find("td.active")
-    .removeClass('active')
-    .text('')
-    // add "active" state to the next td
-    .next()
-    .addClass('active')
-    .text(name);
-  checkWinner(start_time);
+(function(window){
+
+function Game (player1, player2, track_length) {
+  this.players = [player1, player2];
+  this.player_positions = [1, 1];
+  this.track_length = track_length;
+}
+
+Game.prototype.render = function(player_index) {
+  var new_pos = $this.player_positions[player_index];
+  var old_pos = new_pos - 1;
+  var $row = $("#player"+(player_index+1));
+  $row.find("td:nth-child("+old_pos+")")
+      .removeClass("active")
+      .text("");
+  $row.find("td:nth-child("+new_pos+")")
+      .addClass("active")
+      .text(this.players[player_index]);
 };
 
-function checkWinner(start_time) {
-  if ($('.active.winner').length>0) {
+Game.prototype.on_keyup = function(event){
+  var key = event.which;
+  // 81 is p, 80 is q
+  if (key == 81 || key == 80) {
+    var player_index = key == 81 ? 0 : 1;
+    $this.player_positions[player_index] += 1;
+    $this.checkWinner(player_index);
+    $this.render(player_index);
+  }
+};
+
+Game.prototype.start_race = function(){
+  this.start_time = new Date().getTime();
+  $this = this;
+  $(document).on('keyup', this.on_keyup);
+};
+
+
+Game.prototype.checkWinner = function(player_index) {
+  if ($this.player_positions[player_index] >= $this.track_length) {
     var end_time = new Date().getTime();
+    $this.end_time = end_time
     $(document).unbind('keyup');
-    var elapsed = end_time - start_time
-    $('#reset').show()
-    var winner = $('.active.winner').closest(".player-row").data('player-name');
-    window.location = ("/winner?time=" + elapsed +"&winner="+winner)
-  };
+    $this.race_time = end_time - $this.start_time;
+    console.log($this);
+    console.log($this.end_time);
+    $this.winner = $this.players[player_index];
+    window.location = ("/winner?time=" + $this.race_time +"&winner="+this.winner);
+  }
 };
 
-function start_race() {
-  var start_time = new Date().getTime();
 
-  $(document).on('keyup', function(event) {
-    var key = event.which;
-    // 81 is p, 80 is q
-    if (key == 81 || key == 80) {
-      var player_num = key == 81 ? 1 : 2;
-      var player_name = $("#player" + player_num).data("player-name");
-      updatePlayerPostion(player_num, player_name, start_time);
-    }
-  });
-}
+window.Game = Game;
 
-function run_countdown() {
-  setTimeout(function () {
-    // find the count from the html. count down to 0, then call start_race()
-    var $counter = $("#counter");
-    count = parseInt($counter.text());
-    count--;
+}(window));
 
-    if (count == 0) {
-      $counter.text("Go!");
-      start_race();
-    } else {
-      $counter.text(count);
-      run_countdown();
-    }
-
-  }, 1000);
-}
-
-$(function() {
-    run_countdown();
-});

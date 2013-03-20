@@ -25,7 +25,9 @@ get '/winner' do
   @winner_time = params[:time] 
   game.winner_time = @winner_time.to_i
   game.save
+  puts @winner_time
   @winner = Player.find_by_name(params[:winner])
+  puts @winner.inspect
   game.winner = @winner.id
   game.save
   erb :winner
