@@ -1,5 +1,5 @@
 <h1 id="counter">3</h1>
-
+<div class="row-fluid">
 <table class="racer_table">
     <% @players.each_with_index do |player, i| %>
         <h1><%= player.name %> Press <%= @keys[i] %></h1>
@@ -12,8 +12,7 @@
     </tr>
     <% end %>
 </table>
-
-<a href="/"><button id="reset">Reset</button></a>
+</div>
 
 <script src="/js/game.js"></script>
 <script src="/js/application.js"></script>

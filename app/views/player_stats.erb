@@ -1,9 +1,9 @@
-<h1><%= @player.name %>'s Stats</h1>
-<h2>Personal Best</h2>
+<h2><%= @player.name %>'s Stats</h2>
+<h3>Personal Best</h3>
 <p><%=  @player.games.where(winner: @player.id).order("winner_time asc").limit(1).first.winner_time.to_f/1000%>Seconds</p>
-<h2>Total Games</h2>
+<h3>Total Games</h3>
 <p><%= @player.games.count %></p>
-<h2>Lifetime wins</h2>
+<h3>Lifetime wins</h3>
 <p><%= @player.games.where(winner: @player.id).count %></p>
 <table>
   

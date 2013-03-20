@@ -21,7 +21,7 @@ function run_countdown(game) {
   setTimeout(function () {
     // find the count from the html. count down to 0, then call start_race()
     var $counter = $("#counter");
-    count = parseInt($counter.text());
+    count = parseInt($counter.text(), 10);
     count--;
 
     if (count === 0) {

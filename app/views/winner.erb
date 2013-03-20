@@ -1,7 +1,10 @@
+<div class="row-fluid">
 <h1><%= @winner.name %> wins!!!</h1>
 <br>
 <h2>Finished in <%= @winner_time.to_f/1000 %> Seconds</h2>
 
 <a href="/"><button class="btn">Home</button></a>
-<% @player = Player.find_by_name(@winner.name) %>
+<% @player = @winner %>
+<br><br>
 <%= erb :"player_stats", :layout=>false %>
+</div>

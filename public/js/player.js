@@ -1,7 +1,10 @@
 (function(window){
 
-function Player() {
-
+function Player(name) {
+  this.name = name;
 }
+
+window.Player = player;
+
 
 })(window);

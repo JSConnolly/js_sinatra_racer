@@ -35,17 +35,29 @@ Game.prototype.start_race = function(){
   $(document).on('keyup', this.on_keyup);
 };
 
+Game.prototype.send_results = function(winner, time){
+  $.ajax({
+    url: '/game/results',
+    method: 'post',
+    async: false,
+    data: "winner_name="+winner+"&time="+time
+  }).done(function(data){
+    alert("Success: data= " + data);
+  }).fail(function(jqXHR){
+    alert("Failure: jqXHR= " + jqXHR.statusText);
+    });
+  };
+
 
 Game.prototype.checkWinner = function(player_index) {
   if ($this.player_positions[player_index] >= $this.track_length) {
     var end_time = new Date().getTime();
-    $this.end_time = end_time
+    $this.end_time = end_time;
     $(document).unbind('keyup');
     $this.race_time = end_time - $this.start_time;
-    console.log($this);
-    console.log($this.end_time);
     $this.winner = $this.players[player_index];
-    window.location = ("/winner?time=" + $this.race_time +"&winner="+this.winner);
+    $this.send_results($this.winner, $this.race_time);
+    window.location = ("/winner");
   }
 };
 

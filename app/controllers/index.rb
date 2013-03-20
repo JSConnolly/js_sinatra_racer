@@ -13,6 +13,16 @@ post '/game' do
   redirect ("/game/#{@game.id}")
 end
 
+post '/game/results' do
+  content_type :json
+  game = session[:current_game]
+  player = Player.find_by_name(params[:winner_name])
+  time = params[:time]
+  game.winner = player.id; game.winner_time = time; game.save
+  status 200
+  "{'success': true}"
+end
+
 get '/game/:game_id' do
   @keys = ["q", "p"]
   @game = Game.find(params[:game_id])
@@ -21,15 +31,13 @@ get '/game/:game_id' do
 end
 
 get '/winner' do
-  game = session[:current_game]
-  @winner_time = params[:time] 
-  game.winner_time = @winner_time.to_i
-  game.save
-  puts @winner_time
-  @winner = Player.find_by_name(params[:winner])
-  puts @winner.inspect
-  game.winner = @winner.id
-  game.save
+  
+  @game = session[:current_game]
+  puts "game: #{@game}"
+  puts "player id: #{@game.winner}"
+  puts "*"*100
+  @winner = Player.find(@game.winner)
+  @winner_time = @game.winner_time
   erb :winner
 end
 

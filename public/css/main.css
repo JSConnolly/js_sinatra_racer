@@ -1,8 +1,13 @@
+
+div {
+  margin:2% 5%;
+}
+
 .racer_table td {
   background-color: white;
   height: 20px;
   width: 4%;
-  border:solid 1px;
+  border: solid 1px;
 }
 
 .racer_table {
@@ -11,9 +16,7 @@
 
 }
 
- #reset {
-  display:none;
-}
+
 .racer_table td.active {
   background-color: blue;
 }
